@@ -2,10 +2,11 @@
 @section('title', $viewData["title"])
 @section('subtitle', $viewData["subtitle"])
 @section('content')
-    <div class="row">
-        <img src="{{ asset($productos['imagen']) }}" class="img-fluid rounded" width="600" />
-        <h4>{{ $productos['nombre'] }}</h4>
-        <p><b>{{ $productos['descripcion'] }}</b></p>
-        <h5> {{ $productos['precio'] }} </h5>
+<!-- Con el compact. Me sale -->
+<div class="row">
+        <img src="{{ asset($viewData['producto']['imagen']) }}" class="img-fluid rounded" width="600" />
+        <h4>{{ $viewData['producto']['nombre'] }}</h4>
+        <p><b>{{ $viewData['producto']['descripcion'] }}</b></p>
+        <h5>{{ $viewData['producto']['precio'] }}</h5>
     </div>
 @endsection
