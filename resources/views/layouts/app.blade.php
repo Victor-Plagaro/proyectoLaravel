@@ -30,11 +30,7 @@
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav ms-auto">
           <a class="nav-link active" href="{{ route('home.index') }}">Inicio</a>
-<<<<<<< HEAD
-          <a class="nav-link active" href="{{ route('productos.gridProductos') }}">Productos</a>
-=======
           <a class="nav-link active" href="{{ route('product.index') }}">Productos</a>          
->>>>>>> 8ae21f5896c7fd7817dae936c6c6f66d2341fb1b
           <a class="nav-link active" href="{{ route('home.about') }}">Acerca de</a>
         </div>
       </div>
