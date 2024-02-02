@@ -46,7 +46,7 @@
         <tr>
           <th scope="col">ID</th>
           <th scope="col">Nombre</th>
-          <th scope="col">Editar</th>
+          <t scope="col">Editar</th>
           <th scope="col">Eliminar</th>
         </tr>
       </thead>
