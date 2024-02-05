@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Product;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request; 
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\ValidationException;
 
 class AdminProductController extends Controller
@@ -25,15 +26,16 @@ class AdminProductController extends Controller
 
         $request -> input('name', 'price', 'description');
         try{
-            $request -> validate(
-                ["name"=>"required:5"], 
-                ["price"=>"required|min:2|max:3"], 
-                ["description"=>"required|min:10|max:100"]
+            $request -> validate([
+                'name'=>'required|string|max:255', 
+                'price'=>'required|numeric|min:1', 
+                'description'=>'required|min:10|max:100'
+                ]
             );
         }
         catch(ValidationException $e){
-            $errores = $e ->errors();
-            return view('admin.product.index', ['errors' => $errores])->with("viewData", $viewData);
+            $errors = $e ->errors();
+            return view('admin.product.index', ['errors' => $errors])->with("viewData", $viewData);
         }
         $newProduct = new Product();
         $newProduct -> name = $request -> input('name');
@@ -41,7 +43,16 @@ class AdminProductController extends Controller
         $newProduct -> image = "NULL";
         $newProduct -> description = $request -> input('description');
         $newProduct -> save();
+        $archivoID = $newProduct -> id;
 
+        if($request->hasFile('archivoImagen')){
+            $archivo = $request->file('archivoImagen');
+            $extension = $request->file('archivoImagen')->extension();
+            $nombreArchivo =  $archivoID . '_imagen.' . $extension;
+            $newProduct -> image = $nombreArchivo;
+            Storage::disk('public')->put($nombreArchivo, file_get_contents($archivo->path()));
+            $newProduct -> save();
+        }
         
         return view('admin.product.index')->with("viewData", $viewData);
     }
