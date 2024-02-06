@@ -30,7 +30,10 @@ class AdminProductController extends Controller
                 'name'=>'required|string|max:255', 
                 'price'=>'required|numeric|min:1', 
                 'description'=>'required|min:10|max:100'
-                ]
+            ],
+            [
+                'name.required'=>"El nombre es obligatorio"
+            ]
             );
         }
         catch(ValidationException $e){
